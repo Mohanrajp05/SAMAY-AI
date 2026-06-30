@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div align="center">
 <img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
 </div>
@@ -18,3 +19,7 @@ View your app in AI Studio: https://ai.studio/apps/2cc10770-6bc3-4503-9bb9-1c7a3
 2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
 3. Run the app:
    `npm run dev`
+=======
+# SAMAY-AI
+An AI-powered productivity command center built with React, Node.js, and Google Gemini. Features smart task management, AI-generated daily schedules, bill tracking, deep-focus Panic Mode, Telegram notifications, and a context-aware AI chat. Powered by Firebase and Google Cloud Run.
+>>>>>>> 64cc9ea7f3b4f848f42ec2ffd51be73827e1535d
