@@ -1,0 +1,72 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Tasks rules
+    match /tasks/{taskId} {
+      allow create: if request.auth != null && request.resource.data.userId == request.auth.uid;
+      allow read, update, delete: if request.auth != null && resource.data.userId == request.auth.uid;
+    }
+    // Bills rules
+    match /bills/{billId} {
+      allow read, write: if true;
+    }
+    // Schedule rules
+    match /schedule/{itemId} {
+      allow read, write: if true;
+    }
+    // Settings rules
+    match /settings/{settingsId} {
+      allow read, write: if true;
+    }
+    // Chat messages rules
+    match /chat/{messageId} {
+      allow read, write: if true;
+    }
+    // Chat sessions rules
+    match /chat_sessions/{sessionId} {
+      allow read, write: if true;
+    }
+    // Messages rules
+    match /messages/{messageId} {
+      allow read, write: if true;
+    }
+    // Users rules
+    match /users/{userId} {
+      allow read, write: if true;
+    }
+    // Plans rules
+    match /plans/{planId} {
+      allow read, write: if true;
+    }
+    // AI Plans rules
+    match /ai_plans/{planId} {
+      allow read, write: if true;
+    }
+    // Accepted Plans rules
+    match /accepted_plans/{planId} {
+      allow read, write: if true;
+    }
+    // Briefings rules
+    match /briefings/{id} {
+      allow read, write: if true;
+    }
+    match /daily_briefings/{id} {
+      allow read, write: if true;
+    }
+    match /briefing/{id} {
+      allow read, write: if true;
+    }
+    // Contact Us messages rules
+    match /contact_messages/{messageId} {
+      allow create: if request.resource.data.name is string
+                    && request.resource.data.email is string
+                    && request.resource.data.subject is string
+                    && request.resource.data.message is string
+                    && request.resource.data.message.size() >= 2
+                    && request.resource.data.message.size() <= 10000
+                    && request.resource.data.status == "New"
+                    && request.resource.data.createdAt == request.time;
+      allow read, update, delete: if false;
+    }
+  }
+}

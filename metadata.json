@@ -1,0 +1,6 @@
+{
+  "name": "SamayAI",
+  "description": "An AI-powered high-performance productivity dashboard and deadline tracker.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,286 @@
+{
+  "entities": {
+    "ContactMessage": {
+      "title": "ContactMessage",
+      "description": "User contact or support inquiry submitted via the Contact Us form.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the contact message"
+        },
+        "userId": {
+          "type": "string",
+          "description": "The authenticated user ID of the sender if logged in"
+        },
+        "name": {
+          "type": "string",
+          "description": "Full name of the sender"
+        },
+        "email": {
+          "type": "string",
+          "description": "Email address of the sender"
+        },
+        "subject": {
+          "type": "string",
+          "description": "Subject category (e.g. Feedback, Bug Report)"
+        },
+        "message": {
+          "type": "string",
+          "description": "Content of the message"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["New"],
+          "description": "Processing status of the inquiry"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp of when the message was created"
+        }
+      },
+      "required": ["id", "name", "email", "subject", "message", "status", "createdAt"]
+    },
+    "User": {
+      "title": "User",
+      "description": "The user profile document containing connected credentials and habits tracking.",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "description": "The authenticated Firebase User UID"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the user"
+        },
+        "email": {
+          "type": "string",
+          "description": "The primary email address of the user"
+        },
+        "photoURL": {
+          "type": "string",
+          "description": "Link to the user's avatar image"
+        },
+        "streak": {
+          "type": "number",
+          "description": "Daily streak count of completed tasks"
+        },
+        "streakLevel": {
+          "type": "number",
+          "description": "Current productivity level tier"
+        },
+        "completedDays": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "List of days completed"
+        },
+        "telegramConnected": {
+          "type": "boolean",
+          "description": "Whether the user's Telegram Chat is linked"
+        },
+        "telegramChatId": {
+          "type": "string",
+          "description": "The active Telegram Chat ID for push notifications"
+        },
+        "telegramUsername": {
+          "type": "string",
+          "description": "The connected Telegram username"
+        },
+        "telegramFirstName": {
+          "type": "string",
+          "description": "The connected Telegram user's first name"
+        },
+        "telegramConnectedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the Telegram connection was established"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the user account was initialized"
+        }
+      },
+      "required": ["uid", "email"]
+    },
+    "UserSettings": {
+      "title": "UserSettings",
+      "description": "The granular planning and notification settings document.",
+      "type": "object",
+      "properties": {
+        "role": {
+          "type": "string",
+          "enum": ["Student", "Professional", "Founder", "Hybrid"],
+          "description": "Main productivity role of the user"
+        },
+        "personalityMode": {
+          "type": "string",
+          "enum": ["Drill Sergeant", "Best Friend", "Zen Coach", "Corporate"],
+          "description": "The active Samay AI personality style"
+        },
+        "morningBriefingEnabled": {
+          "type": "boolean",
+          "description": "Enable daily 8:00 AM push notifications"
+        },
+        "panicModeAlertsEnabled": {
+          "type": "boolean",
+          "description": "Enable active scheduling alerts during overdue cascades"
+        },
+        "telegramConnected": {
+          "type": "boolean",
+          "description": "Sync notification status with connected Telegram bot"
+        },
+        "emailConnected": {
+          "type": "boolean",
+          "description": "Enable standard email alert channel"
+        },
+        "planningStyle": {
+          "type": "string",
+          "enum": ["Aggressive", "Balanced", "Relaxed"],
+          "description": "The speed and priority matrix applied by AI reoptimizations"
+        },
+        "startHour": {
+          "type": "string",
+          "description": "Productive block window start (e.g. '9:00 AM')"
+        },
+        "endHour": {
+          "type": "string",
+          "description": "Productive block window close (e.g. '10:00 PM')"
+        },
+        "googleCalendarConnected": {
+          "type": "boolean",
+          "description": "Whether integrated Google Calendar push is active"
+        },
+        "googleAccountEmail": {
+          "type": "string",
+          "description": "The connected Google Calendar sync email address"
+        }
+      },
+      "required": ["role", "personalityMode", "morningBriefingEnabled", "panicModeAlertsEnabled", "telegramConnected", "emailConnected"]
+    },
+    "Task": {
+      "title": "Task",
+      "description": "A scheduled item of work or academic tracker assigned to a specific user.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the task"
+        },
+        "userId": {
+          "type": "string",
+          "description": "UID owner of the task"
+        },
+        "name": {
+          "type": "string",
+          "description": "The summary of the task"
+        },
+        "dueDate": {
+          "type": "string",
+          "description": "Format YYYY-MM-DD representing the deadline date"
+        },
+        "time": {
+          "type": "string",
+          "description": "Format HH:MM representing deadline time"
+        },
+        "category": {
+          "type": "string",
+          "enum": ["Academic", "Work", "Finance", "Other"],
+          "description": "Categorization of productivity focus"
+        },
+        "difficulty": {
+          "type": "string",
+          "enum": ["Easy", "Medium", "Hard"],
+          "description": "Perceived intensity of workload"
+        },
+        "completed": {
+          "type": "boolean",
+          "description": "Whether task has been fully completed"
+        },
+        "overdue": {
+          "type": "boolean",
+          "description": "System-computed flag for tasks past deadline"
+        },
+        "hoursLate": {
+          "type": "number",
+          "description": "Accumulated snooze cycles in hours"
+        },
+        "notes": {
+          "type": "string",
+          "description": "Optional descriptions or resources"
+        }
+      },
+      "required": ["id", "userId", "name", "dueDate", "completed"]
+    },
+    "Bill": {
+      "title": "Bill",
+      "description": "Financial obligation tracked per user.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the bill"
+        },
+        "userId": {
+          "type": "string",
+          "description": "UID owner of the bill"
+        },
+        "name": {
+          "type": "string",
+          "description": "The bill provider name"
+        },
+        "bank": {
+          "type": "string",
+          "description": "Payer account name"
+        },
+        "amount": {
+          "type": "number",
+          "description": "The exact monetary amount due"
+        },
+        "dueDateDays": {
+          "type": "number",
+          "description": "Days left until bill expiration"
+        },
+        "category": {
+          "type": "string",
+          "enum": ["Urgent", "Upcoming", "Secure", "Compliance"],
+          "description": "Type of financial obligation"
+        },
+        "priority": {
+          "type": "string",
+          "enum": ["high", "medium", "low"],
+          "description": "Priority severity level"
+        },
+        "completed": {
+          "type": "boolean",
+          "description": "Whether the payment has been finalized"
+        }
+      },
+      "required": ["id", "userId", "name", "amount", "dueDateDays", "completed"]
+    }
+  },
+  "firestore": {
+    "contact_messages/{messageId}": {
+      "schema": "ContactMessage",
+      "description": "Collection of all submitted contact us and support queries."
+    },
+    "users/{userId}": {
+      "schema": "User",
+      "description": "Multi-user profile documents housing connected credentials, email, and telegram IDs."
+    },
+    "settings/{userId}": {
+      "schema": "UserSettings",
+      "description": "Granular user notification preferences and personality modes."
+    },
+    "tasks/{taskId}": {
+      "schema": "Task",
+      "description": "User-scoped tasks list."
+    },
+    "bills/{billId}": {
+      "schema": "Bill",
+      "description": "User-scoped tracked financial obligations."
+    }
+  }
+}

@@ -1,0 +1,240 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+/* Base custom styles to style default scrollbars and make input fields beautiful */
+:root {
+  --bg-primary: #0F0F0F;
+  --bg-secondary: #1A1A1A;
+  --bg-tertiary: #1C1B1B;
+  --border-color: #2E2E2E;
+  --text-primary: #FFFFFF;
+  --text-secondary: #9CA3AF;
+  --text-muted: #6B7280;
+  --text-accent: #c3c0ff;
+}
+
+/* Active overrides when .light is present on html/body elements */
+.light {
+  --bg-primary: #F3F4F6; /* Cool soft light gray background */
+  --bg-secondary: #FFFFFF; /* High-contrast white for cards & boxes */
+  --bg-tertiary: #E5E7EB; /* Medium gray for nested lists or controls */
+  --border-color: #D1D5DB; /* Distinct light border */
+  --text-primary: #111827; /* Rich dark-gray for optimal contrast and readability */
+  --text-secondary: #374151; /* Dark-gray secondary text */
+  --text-muted: #6B7280; /* Neutral gray for labels and notes */
+  --text-accent: #4F46E5; /* Bold purple accent for highlight indicators */
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Layout overrides in light mode */
+.light body {
+  background-color: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Utility Class replacements when nested in .light */
+.light .bg-\[\#0F0F0F\],
+.light .bg-\[\#0F0F0F\]\/80,
+.light .bg-\[\#0F0F0F\]\/90 {
+  background-color: var(--bg-primary) !important;
+}
+
+.light .bg-\[\#1A1A1A\],
+.light .bg-\[\#1A1A1A\]\/95,
+.light .bg-\[\#1A1A1A\]\/90 {
+  background-color: var(--bg-secondary) !important;
+}
+
+.light .bg-\[\#1C1B1B\] {
+  background-color: var(--bg-tertiary) !important;
+}
+
+.light .bg-black,
+.light .bg-black\/40 {
+  background-color: var(--bg-primary) !important;
+}
+
+.light .border-\[\#2E2E2E\],
+.light .border-\[\#2E2E2E\]\/30,
+.light .border-gray-800 {
+  border-color: var(--border-color) !important;
+}
+
+/* 
+   =========================================
+   TEXT COLOR OVERRIDES IN LIGHT MODE
+   =========================================
+   Convert dark-mode white/gray texts to highly readable, high-contrast dark-gray texts.
+   We exempt any text inside elements with solid colorful brand backgrounds to keep them crisp and readable.
+*/
+.light .text-white,
+.light .text-gray-100,
+.light .text-gray-200,
+.light .text-gray-300,
+.light .text-gray-400 {
+  color: var(--text-primary) !important;
+}
+
+.light .text-gray-500,
+.light .text-gray-600 {
+  color: var(--text-muted) !important;
+}
+
+/* Accent overlays mapping */
+.light .text-\[\#c3c0ff\],
+.light .text-indigo-400 {
+  color: var(--text-accent) !important;
+}
+
+.light .text-\[\#c3c0ff\]\/80 {
+  color: rgba(79, 70, 229, 0.8) !important;
+}
+
+.light .hover\:text-white:hover {
+  color: var(--text-primary) !important;
+}
+
+.light .hover\:border-gray-500:hover {
+  border-color: var(--text-muted) !important;
+}
+
+/* Accent background-color and borders in light mode */
+.light .bg-\[\#4F46E5\]\/10,
+.light .bg-\[\#4F46E5\]\/15 {
+  background-color: rgba(79, 70, 229, 0.12) !important;
+}
+
+.light .border-\[\#4F46E5\]\/20,
+.light .border-\[\#4F46E5\]\/10 {
+  border-color: rgba(79, 70, 229, 0.25) !important;
+}
+
+.light .hover\:bg-\[\#1A1A1A\]:hover {
+  background-color: var(--bg-tertiary) !important;
+}
+
+.light .hover\:bg-\[\#242424\]:hover {
+  background-color: var(--bg-tertiary) !important;
+}
+
+/* Form inputs & select fields elements */
+.light input, .light textarea, .light select {
+  background-color: var(--bg-secondary) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border-color) !important;
+}
+
+.light input::placeholder, .light textarea::placeholder {
+  color: #9CA3AF !important;
+}
+
+/* Gradients */
+.light .from-red-500\/10 {
+  --tw-gradient-from: rgba(239, 68, 68, 0.1) var(--tw-gradient-from-position) !important;
+}
+
+.light .to-\[\#1A1A1A\] {
+  --tw-gradient-to: var(--bg-secondary) var(--tw-gradient-to-position) !important;
+}
+
+/* Subtle shadows on white backgrounds for cards in light mode */
+.light .bg-\[\#1A1A1A\] {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03) !important;
+}
+
+/* 
+   ==================================================
+   SOLID BRAND BUTTON & INTERACTIVE ELEMENTS PRESERVATION
+   ==================================================
+   Ensure that any solid colorful buttons (purple, red, green) or chat message bubbles 
+   fully maintain their original brand colors, crisp white text, and beautiful hover states.
+*/
+
+/* 1. Purple/Indigo Brand Buttons and Active Tabs */
+.light .bg-\[\#4F46E5\],
+.light .bg-indigo-600,
+.light .bg-indigo-500,
+.light .bg-\[\#4F46E5\]\/90 {
+  background-color: #4F46E5 !important;
+  color: #FFFFFF !important;
+}
+.light .bg-\[\#4F46E5\] *,
+.light .bg-indigo-600 *,
+.light .bg-indigo-500 *,
+.light .bg-\[\#4F46E5\]\/90 * {
+  color: #FFFFFF !important;
+}
+
+/* 2. Red Solid Buttons (like "Pay Now", "Activate Deep Focus") */
+.light .bg-\[\#EF4444\],
+.light .bg-red-600,
+.light .bg-red-500,
+.light .bg-red-700 {
+  background-color: #EF4444 !important;
+  color: #FFFFFF !important;
+}
+.light .bg-\[\#EF4444\] *,
+.light .bg-red-600 *,
+.light .bg-red-500 *,
+.light .bg-red-700 * {
+  color: #FFFFFF !important;
+}
+
+/* 3. Green Solid Badges / Success Marks */
+.light .bg-\[\#22C55E\],
+.light .bg-green-600,
+.light .bg-green-500 {
+  background-color: #22C55E !important;
+  color: #FFFFFF !important;
+}
+.light .bg-\[\#22C55E\] *,
+.light .bg-green-600 *,
+.light .bg-green-500 * {
+  color: #FFFFFF !important;
+}
+
+/* 4. AIChat.tsx - User Chat Message Bubbles must remain purple with white text */
+.light #ai-chat-view .bg-\[\#4F46E5\],
+.light #ai-chat-view .bg-\[\#4F46E5\] * {
+  background-color: #4F46E5 !important;
+  color: #FFFFFF !important;
+}
+
+/* 5. Custom handle for dark secondary neutral buttons (like "Remind in 2 hrs" bg-[#2E2E2E]) to fit cleanly in light mode */
+.light .bg-\[\#2E2E2E\],
+.light .hover\:bg-\[\#3E3E3E\]:hover {
+  background-color: var(--bg-tertiary) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border-color) !important;
+}
+.light .bg-\[\#2E2E2E\] *,
+.light .hover\:bg-\[\#3E3E3E\]:hover * {
+  color: var(--text-primary) !important;
+}
+
+/* 6. Active select or category tabs with indigo borders */
+.light .border-\[\#4F46E5\] {
+  border-color: #4F46E5 !important;
+}
+
+/* Simple key-value animation helper classes */
+.animate-pulse-slow {
+  animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Global toast slide-in animation */
+@keyframes slideDownFade {
+  from { opacity: 0; transform: translateX(-50%) translateY(-12px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
